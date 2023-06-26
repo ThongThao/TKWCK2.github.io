@@ -62,6 +62,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body> 
 <!--header-->
 	<div class="container">
+		<div class="headerr">
 		<div class="header" id="home">
 			
 		<!-- </div> -->
@@ -83,7 +84,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				
 			  <ul class="megamenu skyblue">
 				<li><a class="pink"  href="index.html">Trang chủ</a></li>
-				      <li class="active grid"><a  href="store.html">Sản phẩm</a>
+				      <li class=" grid"><a  href="store.html">Sản phẩm</a>
 					    <div class="megapanel">
 						<div class="row">
 							<div class="col1">
@@ -144,7 +145,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						
 					</li>
 								
-				<li><a class="pink" href="contact.html">Liên hệ</a></li>
+				<li class="active"><a class=" pink" href="contact.html">Liên hệ</a></li>
 				
 				<li >
 					<form class="search-form search-form-responsive" class="search-form" action="store.html" method="GET">
@@ -210,7 +211,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 			<div class="clearfix"> </div>
 		</div>
-		
+		</div>
 		<div class="content">
 			<!---->
 		<div class="contact">
@@ -239,7 +240,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul class="social ">
 						<li><span>Địa chỉ : 470 Đường Trần Đại Nghĩa, Khu đô thị, Ngũ Hành Sơn, Đà Nẵng, Việt Nam </span></li>
 						<li><span>SĐT : 0794646588</span></li>
-						<li><a href="mailto:info@example.com">Email : shoesstoredn@gmail.com </a></li>
+						<li><a href="mailto:thaottt.22it@vku.udn.vn">Email : shoesstoredn@gmail.com </a></li>
 					</ul>
 							
 					<div class="map">
@@ -292,7 +293,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		  </footer> 	
 	</div>
-
+	<script>
+		var header = document.querySelector('.header');
+		var headerBottom = document.querySelector('.header-bottom');
+		var scrollThreshold = 70;
+		var isHeaderVisible = false;
+		
+		var ticking = false;
+		var lastScrollPosition = 0;
+		
+		function onScroll() {
+			var currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+		
+			if (currentScrollPosition > scrollThreshold && !isHeaderVisible) {
+				header.classList.add('show');
+				headerBottom.style.position = 'fixed';
+				headerBottom.style.width = header.offsetWidth + 'px';
+				headerBottom.style.top = '0';
+				isHeaderVisible = true;
+			} else if (currentScrollPosition <= scrollThreshold && isHeaderVisible) {
+				header.classList.remove('show');
+				headerBottom.style.position = 'static';
+				headerBottom.style.top = 'auto';
+				headerBottom.style.width = '100%';
+				isHeaderVisible = false;
+			}
+		
+			lastScrollPosition = currentScrollPosition;
+			ticking = false;
+		}
+		
+		window.addEventListener('scroll', function() {
+			if (!ticking) {
+				window.requestAnimationFrame(function() {
+					onScroll();
+				});
+				ticking = true;
+			}
+		});
+		
+		
+		
+			</script>
 	<!---->
 </body>
 </html>

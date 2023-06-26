@@ -73,7 +73,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			
 			<ul class="header-in">
-				<li><a href="account.html"><img src="images/user_icon.png"><scan style="font-size: large;">Tài khoản</scan></a></li>
+				<li class="active"><a href="account.html"><img src="images/user_icon.png"><scan style="font-size: large;">Tài khoản</scan></a></li>
 			</ul>
 			<div class="clearfix"></div>
 			<div class="clearfix"></div>
@@ -84,7 +84,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				
 			  <ul class="megamenu skyblue">
 				<li><a class="pink"  href="index.html">Trang chủ</a></li>
-				      <li class="active grid"><a  href="store.html">Sản phẩm</a>
+				      <li class=" grid"><a  href="store.html">Sản phẩm</a>
 					    <div class="megapanel">
 						<div class="row">
 							<div class="col1">
@@ -398,6 +398,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }
         }
     </script>
+	<script>
+		var header = document.querySelector('.header');
+		var headerBottom = document.querySelector('.header-bottom');
+		var scrollThreshold = 70;
+		var isHeaderVisible = false;
+		
+		var ticking = false;
+		var lastScrollPosition = 0;
+		
+		function onScroll() {
+			var currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+		
+			if (currentScrollPosition > scrollThreshold && !isHeaderVisible) {
+				header.classList.add('show');
+				headerBottom.style.position = 'fixed';
+				headerBottom.style.width = header.offsetWidth + 'px';
+				headerBottom.style.top = '0';
+				isHeaderVisible = true;
+			} else if (currentScrollPosition <= scrollThreshold && isHeaderVisible) {
+				header.classList.remove('show');
+				headerBottom.style.position = 'static';
+				headerBottom.style.top = 'auto';
+				headerBottom.style.width = '100%';
+				isHeaderVisible = false;
+			}
+		
+			lastScrollPosition = currentScrollPosition;
+			ticking = false;
+		}
+		
+		window.addEventListener('scroll', function() {
+			if (!ticking) {
+				window.requestAnimationFrame(function() {
+					onScroll();
+				});
+				ticking = true;
+			}
+		});
+		
+		
+		
+			</script>
 	<!---->
 </body>
 </html>

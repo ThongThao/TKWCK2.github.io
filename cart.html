@@ -245,10 +245,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</td>
 						<td class="invert-image"><a href="single.html"><img src="images/si.png" alt=" " class="img-responsive" /></a></td>
 						<td class="invert">
-							 <div class="quantity"> 
+							 <div class="quantity" > 
 								<div class="quantity-select">                           
 									<div class="entry value-minus">&nbsp;</div>
-									<div class="entry value"><span>1</span></div>
+									<div class="entry value"><span style="text-align: center;">1</span></div>
 									<div class="entry value-plus active">&nbsp;</div>
 								</div>
 							</div>
@@ -394,7 +394,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		  </footer> 	
 	</div>
-
+	<script>
+		var header = document.querySelector('.header');
+		var headerBottom = document.querySelector('.header-bottom');
+		var scrollThreshold = 70;
+		var isHeaderVisible = false;
+		
+		var ticking = false;
+		var lastScrollPosition = 0;
+		
+		function onScroll() {
+			var currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+		
+			if (currentScrollPosition > scrollThreshold && !isHeaderVisible) {
+				header.classList.add('show');
+				headerBottom.style.position = 'fixed';
+				headerBottom.style.width = header.offsetWidth + 'px';
+				headerBottom.style.top = '0';
+				isHeaderVisible = true;
+			} else if (currentScrollPosition <= scrollThreshold && isHeaderVisible) {
+				header.classList.remove('show');
+				headerBottom.style.position = 'static';
+				headerBottom.style.top = 'auto';
+				headerBottom.style.width = '100%';
+				isHeaderVisible = false;
+			}
+		
+			lastScrollPosition = currentScrollPosition;
+			ticking = false;
+		}
+		
+		window.addEventListener('scroll', function() {
+			if (!ticking) {
+				window.requestAnimationFrame(function() {
+					onScroll();
+				});
+				ticking = true;
+			}
+		});
+		
+		
+		
+			</script>
 	<!---->
 </body>
 </html>
